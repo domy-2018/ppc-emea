@@ -29,6 +29,11 @@ The query option given a folder location of wallets, will output a report of all
 
 ## Assumptions made
 
+Please ensure the following: 
+ - cardano-node running and connected to mainnet  
+ - cardano-cli is on your PATH
+ - CARDANO_NODE_SOCKET_PATH variable is exported as a global variable
+
 Wallet address files end with ".addr"  
 Wallet verification key files are generated with ".vkey"  
 Wallet signing key files end with ".skey"  
@@ -50,6 +55,7 @@ This will query all the utxos of wallet addresses in the ~/wallets directory
 
 ## Testing
 
+ - Test creation of wallets
  - Test multiple utxo 
  - Test simple case of one utxo
  - Test no utxo in wallet address at all
