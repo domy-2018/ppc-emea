@@ -11,13 +11,13 @@ so that all wallets will contain an equal amount of Ada.
 
 Some screenshots to show some sample interactions with the script:
 
-Creating wallets:
+Creating wallets:  
 ![Creating 5 wallets](creating_multiple_wallets.png "Creating 5 wallets")
 
-State of the 5 wallets prior to redistribution:
+State of the 5 wallets prior to redistribution:  
 ![Before redistribution](before_redistribution.png "Before redistribution")
 
-After redistribution:
+After redistribution:  
 ![After redistribution](after_redistribution.png "After redistribution")
 
 ## Parameters and Function description
