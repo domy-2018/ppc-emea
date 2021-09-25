@@ -1,8 +1,14 @@
 #!/bin/bash
 
 usage() {
-    echo "usage help" 
-    exit 1
+    echo "Usage: $0 [options]" 
+    echo
+    echo "-i <number of wallets>         This specifies how many wallets to create"
+    echo "-o <output folder location>    This specifies the output location for created wallets"
+    echo "-d <wallet folder location>    This specifies the folder location of all the wallets to defragment"
+    echo "                               Defaults to ~/wallet_YYYYMMDDHHMMSS"
+    echo "-q <wallet folder location>    Query all the utxos in the wallets in the folder location"
+    exit 0
 }
 
 # default values
@@ -40,7 +46,7 @@ while getopts $optstring options; do
 done
 
 # creating and initializing wallets
-# loop through and create the number of wallets required.
+# loop and create the number of wallets required specified
 if [ $INIT -ne 0 ]; then
 
     mkdir -p $OUTPUT
@@ -53,10 +59,17 @@ if [ $INIT -ne 0 ]; then
     done
 fi
 
-
-# strategy to redistribute ada
-# Query all the UTXOs of all the wallet addresses.
-# create a transaction with an input of all the UTXOs, and an output to all the wallet addresses in an equally distributed fashion
+# Algorithm to redistribute all the Ada
+# -------------------------------------
+# - Query all the utxos for all the wallets in the wallet folder specified
+# - Loop through each utxo and build the tx-in, tx-out, the signing-key-file
+#   At the same time, keep a count of all the adas in the UTXOs, and how many UTXOs
+# - Build a raw transaction
+# - From the raw transaction, calculate the fees required
+# - Calculate the amount of lovelace to redistribute to all the wallets
+# - Any leftovers from the calculations are added to the fees
+# - Sign the transaction with all the required signing key files 
+# - Submit the transaction
 if [ $DEFRAG != "none" ]; then
 
     wallets=$(ls $DEFRAG/*.addr)
@@ -116,42 +129,44 @@ if [ $DEFRAG != "none" ]; then
 
     txout=$(echo $txout | sed 's/+0/+'"$equal_amounts"'/g')
 
+    echo "Total number of wallets to redistribute     : $counter"
+    echo "The total amount of Ada to redistribute     : $total_less_fees lovelace"
+    echo "After redistribution, each wallet will have : $equal_amounts lovelace"
+    echo "Total fees for this transaction             : $minfee lovelace"
+    echo
+
     cardano-cli transaction build-raw $txin $txout --fee $minfee --out-file tx-defrag.draft  
+    echo "Draft transaction file build: tx-defrag.draft"
 
     cardano-cli transaction sign --tx-body-file tx-defrag.draft $txsign $TESTNET --out-file tx-defrag.signed
+    echo "Transaction has been signed : tx-defrag.signed"
 
+    echo
+    echo "Submitting transaction: ..."
+    echo 
     cardano-cli transaction submit --tx-file tx-defrag.signed $TESTNET
-
-    echo "totalada: "$totalada
-    echo "total_less_fees: "$total_less_fees
-    echo "fees: "$minfee
-    echo "equal_amounts: "$equal_amounts
-    echo "leftover: "$leftover
-    echo $txin
-    echo $txout
-    echo $txsign
-    echo $txincount
-    echo $counter
-    echo "totalada: "$totalada
 
 fi
 
 # query all the UTXOs given a folder
+# Loop through each wallet address file in the provided folder location
+# print each UTXO
 if [ $QUERY != "none" ]; then
 
     wallets=$(ls $QUERY/*.addr)
 
+    echo "Query folder location: $QUERY"
+    echo
+
     for w in $wallets
     do
         w_query_utxo=$(cardano-cli query utxo --address $(cat $w) $TESTNET | grep "lovelace + TxOutDatumHashNone")
-        echo "$w"
-        echo "$w_query_utxo"
 
+        echo $(basename $w)
         echo "$w_query_utxo" | while read -r line
         do
-            w_utxo=$(echo "$line" | awk '{ print $1"#"$2 }')
+            echo "$line" | awk '{ print "  -- "$1"#"$2" - "$3" lovelace" }'
         done
-
 
     done
 
