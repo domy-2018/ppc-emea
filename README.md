@@ -17,6 +17,9 @@ Creating wallets:
 State of the 5 wallets prior to redistribution:  
 ![Before redistribution](before_redistribution.png "Before redistribution")
 
+Running the redistribution command:  
+![Running command](running_redistribution_command.png "Running command")
+
 After redistribution:  
 ![After redistribution](after_redistribution.png "After redistribution")
 
