@@ -23,6 +23,8 @@ Running the redistribution command:
 After redistribution:  
 ![After redistribution](after_redistribution.png "After redistribution")
 
+Also checkout the video to see this in action: Wallet_quickstart.mp4
+
 ## Parameters and Function description
 
 The script accepts the following parameters:
