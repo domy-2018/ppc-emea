@@ -50,6 +50,7 @@ done
 if [ $INIT -ne 0 ]; then
 
     mkdir -p $OUTPUT
+    echo "Creating $INIT wallets in location: $OUTPUT"
 
     for ((i = 1; i <= $INIT; i++));
     do
@@ -57,6 +58,7 @@ if [ $INIT -ne 0 ]; then
         cardano-cli address key-gen --verification-key-file $OUTPUT/wallet_$i.vkey --signing-key-file $OUTPUT/wallet_$i.skey
         cardano-cli address build --payment-verification-key-file $OUTPUT/wallet_$i.vkey --out-file $OUTPUT/wallet_$i.addr $TESTNET
     done
+    echo "Wallet creation complete"
 fi
 
 # Algorithm to redistribute all the Ada

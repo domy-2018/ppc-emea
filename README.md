@@ -30,7 +30,7 @@ The query option given a folder location of wallets, will output a report of all
 ## Assumptions made
 
 Please ensure the following: 
- - cardano-node running and connected to mainnet  
+ - cardano-node running and connected to testnet magic 1097911063  
  - cardano-cli is on your PATH
  - CARDANO_NODE_SOCKET_PATH variable is exported as a global variable
 
@@ -55,10 +55,12 @@ This will query all the utxos of wallet addresses in the ~/wallets directory
 
 ## Testing
 
+Test cases are documented in a Word document under the directory "unit-tests"
+
  - Test creation of wallets
  - Test multiple utxo 
  - Test simple case of one utxo
- - Test no utxo in wallet address at all
+
 
 ## Improvements
 
