@@ -13,9 +13,9 @@ so that all wallets will contain an equal amount of Ada.
 
 The script accepts the following parameters:
 
- - -i <number of wallets> --o <folder location>
- - -d <folder location of wallets>
- - -q <folder location of wallets>
+ - -i \<number of wallets> -o \<folder location\>
+ - -d \<folder location of wallets\>
+ - -q \<folder location of wallets\>
 
 -i for input
 -o for output
