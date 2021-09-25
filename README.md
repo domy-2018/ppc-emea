@@ -17,14 +17,14 @@ The script accepts the following parameters:
  - -d \<folder location of wallets\>
  - -q \<folder location of wallets\>
 
--i for input
--o for output
-The init option takes a number to create the number of wallets in the specific output folder location
+-i for input \n
+-o for output \n
+The init option takes a number to create the number of wallets in the specified output folder location
 
--d for defrag
+-d for defrag \n
 The defrag option given a folder location of wallets will then redistribute all the Ada of the wallets within it
 
--q for query
+-q for query \n
 The query option given a folder location of wallets, will output a report of all the UTXOs in the wallets
 
 ## Assumptions made
@@ -35,9 +35,9 @@ Wallet signing key files end with ".skey"
 
 ## Example
 
-wallet-quickstart.sh -i 50 -o ~/wallets
+wallet-quickstart.sh -i 5 -o ~/wallets
 
-This will create 50 wallets in the location ~/wallets with their corresponding public and signing key, and their addresses.
+This will create 5 wallets in the location ~/wallets with their corresponding public and signing key, and their addresses.
 
 wallet-quickstart.sh -d ~/wallets
 
