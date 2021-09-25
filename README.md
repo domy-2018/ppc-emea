@@ -17,14 +17,14 @@ The script accepts the following parameters:
  - -d \<folder location of wallets\>
  - -q \<folder location of wallets\>
 
--i for input \n
--o for output \n
+-i for input 
+-o for output  
 The init option takes a number to create the number of wallets in the specified output folder location
 
--d for defrag \n
+-d for defrag 
 The defrag option given a folder location of wallets will then redistribute all the Ada of the wallets within it
 
--q for query \n
+-q for query  
 The query option given a folder location of wallets, will output a report of all the UTXOs in the wallets
 
 ## Assumptions made
