@@ -17,11 +17,11 @@ The script accepts the following parameters:
  - -d \<folder location of wallets\>
  - -q \<folder location of wallets\>
 
--i for input 
--o for output  
+-i for input   
+-o for output   
 The init option takes a number to create the number of wallets in the specified output folder location
 
--d for defrag 
+-d for defrag  
 The defrag option given a folder location of wallets will then redistribute all the Ada of the wallets within it
 
 -q for query  
@@ -29,9 +29,9 @@ The query option given a folder location of wallets, will output a report of all
 
 ## Assumptions made
 
-Wallet address files end with ".addr"
-Wallet verification key files are generated with ".vkey"
-Wallet signing key files end with ".skey"
+Wallet address files end with ".addr"  
+Wallet verification key files are generated with ".vkey"  
+Wallet signing key files end with ".skey"  
 
 ## Example
 
